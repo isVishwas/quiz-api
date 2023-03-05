@@ -5,12 +5,14 @@ const dotenv = require("dotenv");
 const connectDb = require("./config/config");
 const usersRoutes = require("./routes/UsersRoute");
 const questionsRoutes = require("./routes/QuestionsRoute");
+const cors = require('cors');
 
 dotenv.config();
 //connecting to mongodb database
 connectDb();
 const app = express();
 //middleware bodyparser
+app.use(cors());
 app.use(express.json());
 
 //dotenv config
