@@ -79,9 +79,31 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+
+const updateScore = asyncHandler(async (req, res) => {
+  
+  const user = await User.findById(req.body._id);
+
+  if (user) {
+    
+    user.score = req.body.score; 
+
+    const updateUser = await user.save();
+
+    res.status(200).json({
+      result : updateUser
+    });
+    
+  } else {
+    res.status(404);
+    throw new Error("user Not Found!");
+  }
+});
+
 module.exports = {
   authController,
   getUserProfile,
   registerUser,
   updateUserProfile,
+  updateScore
 };

@@ -3,7 +3,8 @@ const {
   authController,
   getUserProfile,
   registerUser,
-  updateUserProfile,
+  updateScore,
+  updateUserProfile
 } = require("../controllers/usersController");
 const { protect } = require("../middlewares/authMiddleware");
 
@@ -20,5 +21,10 @@ router
   .route("/profile")
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
+
+//get user profile Private Route
+router
+  .route("/score")
+  .put(protect, updateScore);
 
 module.exports = router;
