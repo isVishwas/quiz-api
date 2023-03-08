@@ -4,14 +4,15 @@ const {
   getUserProfile,
   registerUser,
   updateScore,
-  updateUserProfile
+  updateUserProfile,
+  getUsers
 } = require("../controllers/usersController");
 const { protect } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
 //user registration
-router.route("/").post(registerUser);
+router.route("/").post(registerUser).get(getUsers);
 
 //post email and password auth
 router.post("/login", authController);

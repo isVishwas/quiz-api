@@ -81,22 +81,37 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 
 const updateScore = asyncHandler(async (req, res) => {
-  
+
   const user = await User.findById(req.body._id);
 
   if (user) {
-    
-    user.score = req.body.score; 
+
+    user.score = req.body.score;
 
     const updateUser = await user.save();
 
     res.status(200).json({
-      result : updateUser
+      result: updateUser
     });
-    
+
   } else {
     res.status(404);
     throw new Error("user Not Found!");
+  }
+});
+
+
+const getUsers = asyncHandler(async (req, res) => {
+  
+  const user = await User.find({});
+
+  if (user) {
+    res.json({
+      result: user
+    });
+  } else {
+    res.status(404);
+    throw new Error("User Not Found");
   }
 });
 
@@ -105,5 +120,6 @@ module.exports = {
   getUserProfile,
   registerUser,
   updateUserProfile,
-  updateScore
+  updateScore,
+  getUsers
 };
